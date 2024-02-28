@@ -64,7 +64,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($row) {
       // Verifique a senha usando password_verify
       if (password_verify($password, $row['password'])) {
-        echo '<script>alert("Login efetuado com sucesso!"); window.location.href = "home.php";</script>';
+        // Iniciar a sessão e armazenar informações do usuário
+        session_start();
+        $_SESSION['usuario_id'] = $row['id'];
+        $_SESSION['usuario_nome'] = $row['nome'];
+        $_SESSION['usuario_contacto'] = $row['contacto'];
+        $_SESSION['usuario_email'] = $row['email'];
+        $_SESSION['usuario_password'] = $row['password'];
+
+
+
+        // Redirecionar para a página de home
+        header('Location: home.php');
+        exit();
       } else {
         echo '<script>alert("Email ou senha incorreto!"); window.location.href = "login.php";</script>';
       }

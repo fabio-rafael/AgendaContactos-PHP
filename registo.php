@@ -131,7 +131,7 @@ if ($countries === null) {
             $stmt->bind_param("sssss", $nome, $numero_completo, $idade, $email, $hashed_password);
             $stmt->execute();
             $stmt->close();
-            echo '<script>alert("Registo efetuado com sucesso!"); window.location.href = "registo.php";</script>';
+            echo '<script>alert("Registo efetuado com sucesso!"); window.location.href = "login.php";</script>';
             exit;
           } else {
             echo '<script>alert("Erro ao executar a consulta SQL.");</script>';

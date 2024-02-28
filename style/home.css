@@ -153,3 +153,41 @@
   padding: 10px;
   background-color: white;
 }
+
+.titulo-config {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.titulo-config hr {
+  width: 90%;
+  margin: 0 auto;
+  border-top: 1px solid #ccc;
+  margin-top: 8px;
+  margin-bottom: 15px;
+}
+
+.config-head {
+  text-align: center;
+}
+.configuracao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.configuracao th {
+  font-weight: normal;
+  text-decoration: underline;
+}
+.configuracao li {
+  margin-left: 15px;
+}
+
+.hr-config {
+  width: 50%;
+  margin: 0 auto;
+  border-top: 1px solid #ccc;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
