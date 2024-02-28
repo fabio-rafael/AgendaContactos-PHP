@@ -1,0 +1,143 @@
+/* ====================================FAQ================================*/
+.faq {
+  border: 2px solid #ccc;
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+  height: 74vh;
+  overflow-y: auto;
+}
+
+.faq h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  cursor: default;
+}
+
+.faq p {
+  margin-bottom: 25px;
+  cursor: default;
+}
+
+.accordion,
+.accordion-1 {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+  padding: 20px;
+}
+
+.accordion.active,
+.accordion:hover,
+.accordion-1.active,
+.accordion-1:hover {
+  background-color: #ccc;
+}
+
+.accordion:after,
+.accordion-1:after {
+  content: "\002B";
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.accordion.active:after,
+.accordion-1.active:after {
+  content: "\2212";
+}
+
+.panel,
+.panel-1 {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.panel,
+.panel-1 p {
+  text-align: center;
+  width: 80%;
+  margin-left: 180px;
+  text-decoration: underline;
+}
+
+.faq button,
+.faq button-1 {
+  width: 80%;
+}
+
+.accordion-1 {
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+/* ====================================CONTACT-ME================================*/
+.contact-me {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.assuntos {
+  display: flex;
+}
+
+.contact-me h2 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.input-field {
+  margin-right: 30px;
+}
+
+.input-field label {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.input-field input,
+.input-field textarea {
+  height: 40px;
+  width: 100%;
+  font-size: 16px;
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin-bottom: 15px;
+}
+
+.input-field textarea {
+  height: 70px;
+}
+
+.btn-submit {
+  height: 50px;
+  background: rgba(76, 68, 182, 0.808);
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+  padding: 0px 10px;
+  width: 100%;
+}
+
+.btn-submit:hover {
+  opacity: 0.8;
+}
