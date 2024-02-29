@@ -44,7 +44,7 @@ if (isset($_GET["enviado"]) && $_GET["enviado"] == 1) {
         <button class="accordion">Como posso adicionar ou remover contatos na minha agenda ?
         </button>
         <div class="panel">
-          <p>Para adicionar um novo contato, vá para a sua Dashboard e clique no botão de adição de contatos. Preencha as informações necessárias, como nome, número de telefone e e-mail, e salve as alterações. O mesmo se aplica caso queira eliminar algum contacto.</p>
+          <p>Para adicionar um novo contato, vá para a sua lista de contactos e clique no botão de adição de contatos. Preencha as informações necessárias, como nome, número de telefone e e-mail (opcional), e salve as alterações. O mesmo se aplica caso queira eliminar algum contacto.</p>
         </div>
 
         <button class="accordion">Onde é possível ver mais do meu trabalho ? </button>

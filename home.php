@@ -150,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <div class="content">
     <div class="edit-container">
       <div class="edit">
-        <h1>Editar Informações</h1>
+        <h1>Editar Informações Pessoais</h1>
         <form action="" method="post">
           <h2>Alterar Contacto</h2>
           <hr>
@@ -240,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           </div>
           <hr class="hr-config">
           <div class="numeros">
-            Colocar AQUI AS ESTATISTICAS POSSIVELMENTE GRUPOS NUMERO DE CONTACTOS ETC
+            Numero de contactos
           </div>
         </div>
       </div>

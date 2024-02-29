@@ -48,6 +48,7 @@ if ($countries === null) {
             <label for="indicativo"><i class="fas fa-globe"></i> Indicativo</label>
             <div class="contact-input-wrapper">
               <select name="indicativo" id="indicativo" required>
+                <option value="" disabled selected style="display:none;">Escolha um indicativo</option>
                 <?php
                 foreach ($countries as $country) {
                   echo "<option value='{$country['dial_code']}'>{$country['dial_code']} ({$country['name']})</option>";

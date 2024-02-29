@@ -1,0 +1,168 @@
+.edit-container {
+  display: flex;
+  flex-direction: row;
+  height: 73%;
+  padding: 10px;
+}
+
+.contacts-container {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  border: 2px solid #ccc;
+  overflow: hidden;
+  padding: 20px;
+  margin-right: 40px;
+  background-color: white;
+  overflow-y: scroll;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.contacts-container h1 {
+  text-align: center;
+  margin-bottom: 9px;
+}
+
+.contacts-container table {
+  border: 1px black;
+}
+.contacts-container hr {
+  width: 95%;
+  margin: 0 auto;
+  border-top: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+.contacts-container th {
+  padding: 10px;
+}
+.contacts-container tr td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+.contacts-container i.fas {
+  margin: 10px;
+}
+
+.contacts-container i.fas:hover {
+  background-color: #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.tabela-contactos tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.tabela-contactos tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+/* =======================ADICIONAR==========================*/
+
+.right-row {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  overflow: hidden;
+}
+
+.adicionar {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #ccc;
+  background-color: white;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 2px;
+  height: 300px;
+  border-radius: 15px;
+}
+
+.adicionar h1 {
+  text-align: center;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.input-field {
+  margin-bottom: 25px;
+}
+
+.input-field label {
+  margin-bottom: 10px;
+  font-size: 15px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.input-field input {
+  height: 33px;
+  width: 60%;
+  font-size: 16px;
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.adicionar button {
+  height: 38px;
+  background: rgba(76, 68, 182, 0.808);
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 12px;
+  padding: 0px 10px;
+  width: 30%;
+}
+
+.adicionar button:hover {
+  opacity: 0.8;
+}
+/* =======================ADICIONAR==========================*/
+.procurar {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #ccc;
+  background-color: white;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 2px;
+  height: 350px;
+  border-radius: 15px;
+}
+
+.procurar h1 {
+  text-align: center;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.procurar p {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.procurar button {
+  height: 38px;
+  background: rgba(76, 68, 182, 0.808);
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 32px;
+  padding: 0px 10px;
+  width: 30%;
+}
+.procurar button:hover {
+  opacity: 0.8;
+}
