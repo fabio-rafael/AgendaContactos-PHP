@@ -1,9 +1,7 @@
 <?php
 include('nav.html');
 include('database.php');
-
-session_start();
-
+include('session.php');
 function sanitize_input($input)
 {
   return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');

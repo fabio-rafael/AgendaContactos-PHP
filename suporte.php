@@ -1,6 +1,7 @@
 <?php
 include('nav.html');
 include('database.php');
+include('session.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);

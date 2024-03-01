@@ -1,5 +1,6 @@
 <?php
 include('database.php');
+include('session.php');
 
 $countriesJson = file_get_contents('Countries.json');
 $countries = json_decode($countriesJson, true);
