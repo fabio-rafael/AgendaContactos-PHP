@@ -143,11 +143,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <link rel="stylesheet" href="style/global.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="style/home.css" />
+  <link rel="shortcut icon" href="style/contact-us.ico" type="image/x-icon">
   <title>Homepage</title>
 </head>
 
 <body>
-  <div class="content">
+  <div class=" content">
     <div class="edit-container">
       <div class="edit">
         <h1>Editar Informações Pessoais</h1>
