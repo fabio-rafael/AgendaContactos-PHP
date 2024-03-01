@@ -60,10 +60,63 @@ if (isset($_POST['edit_contacto'])) {
   $stmt->close();
 }
 
+// Lógica para filtrar por nome ou número de contacto
+if (isset($_POST['submit_filtro'])) {
+  $filtro_nome = $_POST['nome'];
+  $filtro_telefone = $_POST['contacto'];
 
+  // Verifica se pelo menos um dos campos está preenchido
+  if (!empty($filtro_nome) || !empty($filtro_telefone)) {
+
+
+    $sql = "SELECT * FROM contacts WHERE user_id = ?";
+    $param_types = "i";
+    $param_values = array($_SESSION['usuario_id']);
+
+    // Se o campo de nome estiver preenchido
+    if (!empty($filtro_nome)) {
+      $sql .= " AND nome LIKE ?";
+      $param_types .= "s";
+      $param_values[] = "%$filtro_nome%";
+    }
+
+    // Se o campo de contacto estiver preenchido
+    if (!empty($filtro_telefone)) {
+      $sql .= " AND contacto LIKE ?";
+      $param_types .= "s";
+      $param_values[] = "%$filtro_telefone%";
+    }
+
+    // Adiciona o ORDER BY para ordenar por nome
+    $sql .= " ORDER BY nome ASC";
+
+    // Prepara a consulta
+    $stmt = $conexao->prepare($sql);
+
+    // Adiciona os parâmetros
+    $stmt->bind_param($param_types, ...$param_values);
+
+    // Executa a consulta
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Verifica se há resultados
+    if ($result->num_rows > 0) {
+      echo '<script>';
+      while ($row = $result->fetch_assoc()) {
+        echo "alert('Contato encontrado:\\nNome: " . htmlspecialchars($row['nome']) . "\\nEmail: " . htmlspecialchars($row['email']) . "\\nNúmero de Contato: " . htmlspecialchars($row['contacto']) . "');";
+      }
+      echo '</script>';
+    } else {
+      echo '<script>alert("Nenhum contato encontrado.");</script>';
+    }
+
+    $stmt->close();
+  } else {
+    echo '<script>alert("Por favor, insira pelo menos um valor para filtrar.");</script>';
+  }
+}
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -153,7 +206,7 @@ if (isset($_POST['edit_contacto'])) {
         <div class="procurar">
           <h1><i class="fa-solid fa-magnifying-glass"></i> Encontrar Contacto</h1>
           <p>Insira o nome ou número do contacto</p>
-          <form>
+          <form method="POST">
             <div class="input-field">
               <div class="campo">
                 <label for="nome" style="margin-left:41px;">Nome:</label>
@@ -163,11 +216,12 @@ if (isset($_POST['edit_contacto'])) {
 
             <div class="input-field">
               <div class="campo">
-                <label for="telefone">Nº Contacto:</label>
-                <input type="tel" id="telefone" name="telefone" placeholder="Insira o contacto">
+                <label for="contacto">Nº Contacto:</label>
+                <input type="tel" id="contacto" name="contacto" placeholder="Insira o contacto">
               </div>
-              <button type="submit">Filtrar contactos</button>
+              <button type="submit" name="submit_filtro">Filtrar contactos</button>
             </div>
+          </form>
         </div>
       </div>
 </body>
