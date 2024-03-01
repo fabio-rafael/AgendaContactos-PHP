@@ -193,3 +193,17 @@
   margin-top: 25px;
   margin-bottom: 25px;
 }
+
+.numeros-head h1 {
+  text-align: center;
+}
+
+.contactos {
+  font-size: 120px;
+  text-align: center;
+  text-shadow: 1px 5px 5px #000;
+}
+
+.numeros p {
+  text-align: center;
+}

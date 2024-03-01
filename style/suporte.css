@@ -141,3 +141,7 @@
 .btn-submit:hover {
   opacity: 0.8;
 }
+
+.contact-me small {
+  margin-top: 10px;
+}

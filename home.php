@@ -238,13 +238,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               </tr>
             </table>
           </div>
-          <hr class="hr-config">
-          <div class="numeros">
-            Numero de contactos
+        </div>
+        <hr class="hr-config">
+        <div class="numeros">
+          <div class="numeros-head">
+            <h1>Neste momento tem </h1>
           </div>
+          <div class="contactos">
+            <?php
+            if (isset($_SESSION['usuario_nome'])) {
+              $query = "SELECT COUNT(*) as total_rows FROM contacts WHERE user_id=?";
+              // Preparar a consulta com um statement parametrizado
+              $stmt = $conexao->prepare($query);
+              // Verificar se a preparação foi bem-sucedida
+              if ($stmt) {
+                // Bind do parâmetro
+                $stmt->bind_param("i", $_SESSION['usuario_id']);
+                // Executar a consulta
+                $stmt->execute();
+                // Bind do resultado
+                $stmt->bind_result($totalLinhas);
+                // Obter o resultado
+                $stmt->fetch();
+                echo  $totalLinhas;
+                // Fechar o statement
+                $stmt->close();
+              } else {
+                // Tratar erro na preparação da consulta
+                echo "Erro na preparação da consulta.";
+              }
+              $conexao->close();
+            } else {
+              echo "Erro de ligação!";
+            }
+            ?>
+          </div>
+          <p>Contacto(s)</p>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </body>
 

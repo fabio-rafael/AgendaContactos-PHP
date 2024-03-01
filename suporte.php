@@ -1,9 +1,22 @@
 <?php
 include('nav.html');
+include('database.php');
 
 
-if (isset($_GET["enviado"]) && $_GET["enviado"] == 1) {
-  echo "<p class='mensagem-sucesso'>E-mail enviado com sucesso!</p>";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $email = $_POST['email'];
+  $assunto = $_POST['assunto'];
+  $mensagem = $_POST['mensagem'];
+
+  $stmt = $conexao->prepare("INSERT INTO email (email, assunto, mensagem) VALUES (?, ?, ?)");
+  $stmt->bind_param("sss", $email, $assunto, $mensagem);
+  if ($stmt->execute()) {
+    echo '<script>alert("Email enviado com sucesso!"); window.location.href = "suporte.php";</script>';
+  } else {
+    echo '<script>alert("Erro ao enviar o email , certefique-se que inseriu dados válidos !"); window.location.href = "suporte.php";</script>';
+  }
+
+  $stmt->close();
 }
 
 ?>
@@ -53,7 +66,7 @@ if (isset($_GET["enviado"]) && $_GET["enviado"] == 1) {
         </div>
         <div class="contact-me">
           <h2>Entrar em contato</h2>
-          <form action="enviar_email.php" method="post">
+          <form method="post">
             <div class="assuntos">
               <div class="input-field">
                 <label for="email">Seu Email:</label>
@@ -70,8 +83,9 @@ if (isset($_GET["enviado"]) && $_GET["enviado"] == 1) {
                 <textarea id="mensagem" name="mensagem" required></textarea>
               </div>
             </div>
-            <button class="btn-submit" type="submit">Enviar Mensagem</button>
+            <button class="btn-submit" type="submit" name="enviar_email">Enviar Mensagem</button>
           </form>
+          <small class="proof">Apenas prova de conceito , os emails são guardados na base de dados.</small>
         </div>
         <script>
           // Função para adicionar eventos de clique a elementos com a classe 'accordion' ou 'accordion-1'
