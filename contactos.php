@@ -4,13 +4,23 @@ include('database.php');
 
 session_start();
 
+function sanitize_input($input)
+{
+  return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
+}
 
-//Lógica para adicionar o contacto 
+// Lógica para adicionar o contacto 
 if (isset($_POST['adicionar_contacto'])) {
-  $nome = $_POST['nome'];
-  $email = $_POST['email'];
-  $contacto = $_POST['telefone'];
+  $nome = sanitize_input($_POST['nome']);
+  $email = sanitize_input($_POST['email']);
+  $contacto = sanitize_input($_POST['telefone']);
   $user_id = $_SESSION['usuario_id'];  // Obtém o ID do usuário da sessão
+
+  // Validar os campos 
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo '<script>alert("Por favor, insira um email válido."); window.location.href = "contactos.php";</script>';
+    exit;
+  }
 
   $stmt = $conexao->prepare("INSERT INTO contacts (nome, email, contacto, user_id) VALUES (?, ?, ?, ?)");
   $stmt->bind_param("sssi", $nome, $email, $contacto, $user_id);
@@ -24,11 +34,9 @@ if (isset($_POST['adicionar_contacto'])) {
   $stmt->close();
 }
 
-
-//Lógica para eliminar o contacto
-
+// Lógica para eliminar o contacto
 if (isset($_POST['eliminar_contacto'])) {
-  $id = $_POST['id'];
+  $id = sanitize_input($_POST['id']);
   $stmt = $conexao->prepare("DELETE FROM contacts WHERE id =?");
   $stmt->bind_param("i", $id);
 
@@ -41,11 +49,11 @@ if (isset($_POST['eliminar_contacto'])) {
   $stmt->close();
 }
 
-//Lógica para atualizar o contacto
+// Lógica para atualizar o contacto
 if (isset($_POST['edit_contacto'])) {
-  $id = $_POST['id'];
-  $email = $_POST['email'];
-  $contacto = $_POST['telefone'];
+  $id = sanitize_input($_POST['id']);
+  $email = sanitize_input($_POST['email']);
+  $contacto = sanitize_input($_POST['telefone']);
   $user_id = $_SESSION['usuario_id'];
 
   $stmt = $conexao->prepare("UPDATE contacts SET email=?, contacto=? WHERE id=? AND user_id=?");
@@ -62,13 +70,11 @@ if (isset($_POST['edit_contacto'])) {
 
 // Lógica para filtrar por nome ou número de contacto
 if (isset($_POST['submit_filtro'])) {
-  $filtro_nome = $_POST['nome'];
-  $filtro_telefone = $_POST['contacto'];
+  $filtro_nome = sanitize_input($_POST['nome']);
+  $filtro_telefone = sanitize_input($_POST['contacto']);
 
   // Verifica se pelo menos um dos campos está preenchido
   if (!empty($filtro_nome) || !empty($filtro_telefone)) {
-
-
     $sql = "SELECT * FROM contacts WHERE user_id = ?";
     $param_types = "i";
     $param_values = array($_SESSION['usuario_id']);
@@ -104,7 +110,7 @@ if (isset($_POST['submit_filtro'])) {
     if ($result->num_rows > 0) {
       echo '<script>';
       while ($row = $result->fetch_assoc()) {
-        echo "alert('Contato encontrado:\\nNome: " . htmlspecialchars($row['nome']) . "\\nEmail: " . htmlspecialchars($row['email']) . "\\nNúmero de Contato: " . htmlspecialchars($row['contacto']) . "');";
+        echo "alert('Contato encontrado:\\nNome: " . sanitize_input($row['nome']) . "\\nEmail: " . sanitize_input($row['email']) . "\\nNúmero de Contato: " . sanitize_input($row['contacto']) . "');";
       }
       echo '</script>';
     } else {

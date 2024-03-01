@@ -2,23 +2,28 @@
 include('nav.html');
 include('database.php');
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $email = $_POST['email'];
-  $assunto = $_POST['assunto'];
-  $mensagem = $_POST['mensagem'];
+  $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+  $assunto = filter_input(INPUT_POST, 'assunto', FILTER_SANITIZE_STRING);
+  $mensagem = filter_input(INPUT_POST, 'mensagem', FILTER_SANITIZE_STRING);
+
+  // Validar o e-mail
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo '<script>alert("Por favor, insira um email válido."); window.location.href = "suporte.php";</script>';
+    exit;
+  }
 
   $stmt = $conexao->prepare("INSERT INTO email (email, assunto, mensagem) VALUES (?, ?, ?)");
   $stmt->bind_param("sss", $email, $assunto, $mensagem);
+
   if ($stmt->execute()) {
     echo '<script>alert("Email enviado com sucesso!"); window.location.href = "suporte.php";</script>';
   } else {
-    echo '<script>alert("Erro ao enviar o email , certefique-se que inseriu dados válidos !"); window.location.href = "suporte.php";</script>';
+    echo '<script>alert("Erro ao enviar o email, certifique-se que inseriu dados válidos!"); window.location.href = "suporte.php";</script>';
   }
 
   $stmt->close();
 }
-
 ?>
 
 <!DOCTYPE html>
