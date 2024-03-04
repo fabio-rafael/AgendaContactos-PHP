@@ -21,3 +21,6 @@ Este projeto consiste numa aplicação web para gestão de contactos, implementa
 
 ### Indicativo Telefónico
 O indicativo telefónico é gerido através de um ficheiro JSON externo, oferecendo uma flexibilidade fácil na gestão de códigos de país.
+
+
+[![Demo](https://img.shields.io/badge/Demo-Link-blue.svg)](https://agendacontactos-fabiorafael.000webhostapp.com/)

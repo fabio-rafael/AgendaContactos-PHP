@@ -2,6 +2,7 @@
 include('session.php');
 include('nav.html');
 include('database.php');
+include('session.php');
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
