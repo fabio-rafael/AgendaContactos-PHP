@@ -1,7 +1,9 @@
 <?php
+include('session.php');
 include('database.php');
 
-$countriesJson = file_get_contents('Countries.json');
+
+$countriesJson = file_get_contents('countries.json');
 $countries = json_decode($countriesJson, true);
 
 if ($countries === null) {
@@ -16,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Recuperar os valores do formulário
   $nome = $_POST['nome'];
   $email = $_POST['email'];
-  $indicativo = $_POST['indicativo'];
+  $indicativo = isset($_POST['indicativo']) ? $_POST['indicativo'] : '';
   $contacto = $_POST['contacto'];
 
   $numero_completo = $indicativo . $contacto; // junção do indicativo com o contacto
@@ -54,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param($placeholders, ...$updateParams);
 
     if ($stmt->execute()) {
-      echo "Dados atualizados com sucesso!";
+      //echo "Dados atualizados com sucesso!";
       header("Location: contactos.php");
       exit();
     } else {

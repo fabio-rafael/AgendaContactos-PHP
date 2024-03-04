@@ -1,8 +1,44 @@
 <?php
-include('database.php')
+include('database.php');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS);
+  $password = $_POST['password'];
+
+  if (empty($email) || empty($password)) {
+    echo '<script>alert("Por favor preencha todos os campos!"); window.location.href = "login.php";</script>';
+  } else {
+    // Use prepared statements para evitar injeção de SQL
+    $stmt = $conexao->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    if ($row) {
+      // Verifique a senha usando password_verify
+      if (password_verify($password, $row['password'])) {
+        // Iniciar a sessão e armazenar informações do usuário
+        session_start();
+        $_SESSION['usuario_id'] = $row['id'];
+        $_SESSION['usuario_nome'] = $row['nome'];
+        $_SESSION['usuario_contacto'] = $row['contacto'];
+        $_SESSION['usuario_email'] = $row['email'];
+        $_SESSION['usuario_password'] = $row['password'];
+        // Redirecionar para a página de home
+        header('Location: index.php');
+        exit();
+      } else {
+        echo '<script>alert("Email ou senha incorreto!"); window.location.href = "login.php";</script>';
+      }
+    } else {
+      echo '<script>alert("Email ou senha incorreto!"); window.location.href = "login.php";</script>';
+    }
+
+    $stmt->close();
+  }
+}
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +68,7 @@ include('database.php')
           <label for="password"><i class="fas fa-lock"></i> Password </label>
           <input type="password" name="password" id="password" placeholder="Insert your Password" required />
         </div>
-        <a href="home.hmtl"><button class="btn-login" type="submit">Login</button></a>
+        <button class="btn-login" type="submit">Login</button>
       </form>
       <div class="links">
         Ainda não tem conta ?
@@ -43,48 +79,3 @@ include('database.php')
 </body>
 
 </html>
-
-<?php
-include('database.php');
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS);
-  $password = $_POST['password'];
-
-  if (empty($email) || empty($password)) {
-    echo '<script>alert("Por favor preencha todos os campos!"); window.location.href = "login.php";</script>';
-  } else {
-    // Use prepared statements para evitar injeção de SQL
-    $stmt = $conexao->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-
-    if ($row) {
-      // Verifique a senha usando password_verify
-      if (password_verify($password, $row['password'])) {
-        // Iniciar a sessão e armazenar informações do usuário
-        session_start();
-        $_SESSION['usuario_id'] = $row['id'];
-        $_SESSION['usuario_nome'] = $row['nome'];
-        $_SESSION['usuario_contacto'] = $row['contacto'];
-        $_SESSION['usuario_email'] = $row['email'];
-        $_SESSION['usuario_password'] = $row['password'];
-
-
-
-        // Redirecionar para a página de home
-        header('Location: home.php');
-        exit();
-      } else {
-        echo '<script>alert("Email ou senha incorreto!"); window.location.href = "login.php";</script>';
-      }
-    } else {
-      echo '<script>alert("Email ou senha incorreto!"); window.location.href = "login.php";</script>';
-    }
-
-    $stmt->close();
-  }
-}
-?>

@@ -1,8 +1,7 @@
 <?php
+include('session.php');
 include('nav.html');
 include('database.php');
-
-session_start();
 
 function sanitize_input($input)
 {

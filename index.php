@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-include('nav.html');
-include('database.php');
-
 // Verificar se o usuário está autenticado
 if (!isset($_SESSION['usuario_id'])) {
   // Se não estiver autenticado, redirecionar para a página de login
@@ -11,8 +8,11 @@ if (!isset($_SESSION['usuario_id'])) {
   exit();
 }
 
+include('nav.html');
+include('database.php');
+
 // Dados dos países
-$countriesJson = file_get_contents('Countries.json');
+$countriesJson = file_get_contents('countries.json');
 $countries = json_decode($countriesJson, true);
 
 if ($countries === null) {
@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->execute()) {
       $_SESSION['usuario_contacto'] = $numero_completo;
-      echo '<script>alert("Contacto atualizado com sucesso!"); window.location.href = "home.php";</script>';
+      echo '<script>alert("Contacto atualizado com sucesso!"); window.location.href = "index.php";</script>';
     } else {
-      echo '<script>alert("Erro ao atualizar o contacto!"); window.location.href = "home.php";</script>';
+      echo '<script>alert("Erro ao atualizar o contacto!"); window.location.href = "index.php";</script>';
     }
 
     $stmt->close();
@@ -71,9 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt_update_email->execute()) {
           $_SESSION['usuario_email'] = $email;
-          echo '<script>alert("Email atualizado com sucesso!"); window.location.href = "home.php";</script>';
+          echo '<script>alert("Email atualizado com sucesso!"); window.location.href = "index.php";</script>';
         } else {
-          echo '<script>alert("Erro ao atualizar o email!"); window.location.href = "home.php";</script>';
+          echo '<script>alert("Erro ao atualizar o email!"); window.location.href = "index.php";</script>';
         }
 
         $stmt_update_email->close();
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['usuario_password'] = $password;
             echo '<script>alert("Senha atualizada com sucesso!"); window.location.href = "login.php";</script>';
           } else {
-            echo '<script>alert("Erro ao atualizar a senha!"); window.location.href = "home.php";</script>';
+            echo '<script>alert("Erro ao atualizar a senha!"); window.location.href = "index.php";</script>';
           }
 
           $stmt_update_password->close();
@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
       } else {
         // Erro ao verificar a senha atual
-        echo '<script>alert("Erro ao verificar a senha atual!"); window.location.href = "home.php";</script>';
+        echo '<script>alert("Erro ao verificar a senha atual!"); window.location.href = "index.php";</script>';
       }
     }
   }

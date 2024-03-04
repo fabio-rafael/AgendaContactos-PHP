@@ -7,4 +7,5 @@ $db_name = "agendadb";
 $conexao = "";
 
 
+
 $conexao = mysqli_connect($db_server, $db_user, $db_pass, $db_name);

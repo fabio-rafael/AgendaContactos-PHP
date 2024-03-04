@@ -1,7 +1,7 @@
 <?php
 include('database.php');
 
-$countriesJson = file_get_contents('Countries.json');
+$countriesJson = file_get_contents('countries.json');
 $countries = json_decode($countriesJson, true);
 
 if ($countries === null) {
